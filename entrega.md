@@ -6,7 +6,7 @@
 ## Integrantes y repositorio
 - Integrantes: Luna Lugo — Grupo B; Alejandro Bernal — Grupo B
 - Asunto: `MLOps — Defiende el servidor — Grupo B — Luna Lugo, Alejandro Bernal`
-- Repositorio de código: https://github.com/alejobernalg/defiende-el-servidor (privado; acceso de lectura para el docente por invitación)
+- Repositorio de código: https://github.com/alejobernalg/defiende-el-servidor (público)
 - Commit final de la entrega: **PENDIENTE**
 
 ## Versiones
