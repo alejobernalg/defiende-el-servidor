@@ -4,11 +4,12 @@
 - evidencias/mlflow/runs.csv y runs.json: todos los parámetros, métricas y tags.
 - evidencias/mlflow/<run_id>/: params.json, metrics.json, tags.json, meta.json y artefactos relevantes
   (config, matriz de confusión, curva de umbrales, predicciones de validación, MLmodel). Los pickles
-  grandes (>5 MB) no se copian: el modelo está en MLflow (run ID) y en Hugging Face.
+  grandes (>5 MB) no se duplican; se exporta una referencia recuperable a Hugging Face cuando existe.
 """
 from __future__ import annotations
 
 import json
+import os
 import shutil
 
 import mlflow
@@ -32,6 +33,8 @@ def main() -> None:
     exp = client.get_experiment_by_name(EXPERIMENT)
     runs = client.search_runs([exp.experiment_id], order_by=["attributes.start_time ASC"])
     out = EVID_DIR / "mlflow"
+    selection_path = EVID_DIR / "seleccion.json"
+    selection = json.loads(selection_path.read_text(encoding="utf-8")) if selection_path.exists() else {}
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
@@ -60,9 +63,30 @@ def main() -> None:
         for f in ("MLmodel", "requirements.txt", "conda.yaml", "python_env.yaml", "model.pkl", "input_example.json"):
             src = f"{mdir}/{f}"
             try:
-                if f == "model.pkl" and pd.io.common.file_exists(src) and __import__("os").path.getsize(src) > 5e6:
-                    (d / "model" / "model.pkl.NOT_COPIED.txt").write_text(
-                        "Pickle > 5 MB; recuperarlo desde MLflow (run ID) o Hugging Face (SHA en seleccion.json).\n")
+                if f == "model.pkl" and pd.io.common.file_exists(src) and os.path.getsize(src) > 5e6:
+                    selection_version = next(
+                        (v for v in ("v1", "v2") if selection.get(v, {}).get("mlflow_run_id") == rid), None
+                    )
+                    hf = selection.get("huggingface", {}).get(selection_version, {}) if selection_version else {}
+                    if hf.get("revision_sha") and hf.get("model_file_sha256"):
+                        write_json(d / "model" / "external_artifact.json", {
+                            "run_id": rid,
+                            "selection_version": selection_version,
+                            "artifact_note": "The exported MLflow pickle exceeds the 5 MB export limit and is not duplicated here. Recover the complete selected model from the immutable Hugging Face revision below. It is a separate serialized file; do not assume byte identity with the omitted MLflow model.pkl.",
+                            "huggingface_repo": hf["repo"],
+                            "evaluated_revision_sha": hf["revision_sha"],
+                            "evaluated_file": "model.joblib",
+                            "evaluated_file_sha256": hf["model_file_sha256"],
+                            "selection_record": "evidencias/seleccion.json",
+                        })
+                    else:
+                        write_json(d / "model" / "external_artifact.json", {
+                            "run_id": rid,
+                            "artifact_uri": lm.artifact_location,
+                            "artifact_path": "model.pkl",
+                            "artifact_size_bytes": os.path.getsize(src),
+                            "recovery_note": "The MLflow pickle exceeds the 5 MB export limit. Retrieve model.pkl from the MLflow artifact URI above; no byte-identical Hugging Face replacement is recorded for this run.",
+                        })
                     continue
                 shutil.copy(src, d / "model" / f)
             except FileNotFoundError:
