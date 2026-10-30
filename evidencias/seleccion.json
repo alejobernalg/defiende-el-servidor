@@ -66,5 +66,22 @@
     "reason": "Modelo: E4 tiene el mayor macro-F1 de validación con umbral 0.5 (0.9470). Umbral: Mínima FPR con recall de ataque >= 0.95 en validación (rejilla 0.01-0.99). En 0.5 tenía recall 0.9788 y FPR 0.0970; con 0.64 recall 0.9511 y FPR 0.0493."
   },
   "test_used_for_selection": false,
-  "huggingface": null
+  "huggingface": {
+    "v1": {
+      "repo": "AlejandroLiberato/defiende-el-servidor-unsw-nb15",
+      "url": "https://huggingface.co/AlejandroLiberato/defiende-el-servidor-unsw-nb15",
+      "revision_sha": "8033bee6b22195aa79e007085d680b104256a769",
+      "tag": "v1",
+      "commit_url": "https://huggingface.co/AlejandroLiberato/defiende-el-servidor-unsw-nb15/commit/8033bee6b22195aa79e007085d680b104256a769",
+      "model_file_sha256": "2f8deb7a64a4607ccca04451e35919d73074f349e67828a4fe8b597547e845c0"
+    },
+    "v2": {
+      "repo": "AlejandroLiberato/defiende-el-servidor-unsw-nb15",
+      "url": "https://huggingface.co/AlejandroLiberato/defiende-el-servidor-unsw-nb15",
+      "revision_sha": "6282a4d6e05d473f37d0243f3bfa18b10116586e",
+      "tag": "v2",
+      "commit_url": "https://huggingface.co/AlejandroLiberato/defiende-el-servidor-unsw-nb15/commit/6282a4d6e05d473f37d0243f3bfa18b10116586e",
+      "model_file_sha256": "03d398894717439d1e4bc20112309bf0a6a10a5727e2af4349e3baca2ad38a81"
+    }
+  }
 }
