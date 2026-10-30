@@ -1,0 +1,70 @@
+{
+  "frozen_at_utc": "2026-10-30T00:12:38+00:00",
+  "selection_code_parent_commit": "6608adae6f974148c8f2b32b72c32f72c42ea36a",
+  "freeze_evidence": "El commit de Git que añade este archivo (tag code-v2) es anterior a cualquier evaluación en test; ver git log de evidencias/metricas-test.json.",
+  "rule": {
+    "model_rule": "Mayor macro-F1 de validación con umbral 0.5 entre E1-E4; empate -> menor FPR.",
+    "threshold_rule": {
+      "description": "Para un equipo de seguridad perder ataques es costoso, pero cada falso positivo es una alerta que alguien revisa. Se elige el umbral que MINIMIZA la FPR manteniendo recall de ataque >= 0.95 en validación. Si ninguno cumple, se usa el umbral que maximiza macro-F1.",
+      "min_recall_attack": 0.95,
+      "grid": {
+        "start": 0.01,
+        "stop": 0.99,
+        "step": 0.01
+      }
+    }
+  },
+  "chosen_version": "v2",
+  "v1": {
+    "experiment_id": "E1",
+    "experiment_name": "e1_logreg_base",
+    "mlflow_run_id": "ae051ab637994bb3bd29cf521f544087",
+    "git_commit_training": "ecbb4899184b23336917b40f32269aff490e89b5",
+    "dvc_prepared_md5": "f6594eb80f87d21c69d1e10c46c0de5f.dir",
+    "dvc_raw_md5": "fe93051ae209ffb0128a31e7a478c009.dir",
+    "model_family": "logistic_regression",
+    "model_file_sha256": "2f8deb7a64a4607ccca04451e35919d73074f349e67828a4fe8b597547e845c0",
+    "threshold": 0.5,
+    "threshold_rule": "y_pred = 1 si score_attack >= threshold",
+    "validation_metrics_at_threshold": {
+      "recall_attack": 0.9869563411290657,
+      "precision_attack": 0.9246186176836861,
+      "fpr": 0.17414366627708353,
+      "macro_f1": 0.9228105320176656,
+      "accuracy": 0.9360438686214343,
+      "tp": 23759,
+      "fp": 1937,
+      "tn": 9186,
+      "fn": 314,
+      "n": 35196
+    },
+    "reason": "Primera solución funcional: referencia lineal con umbral por defecto 0.5."
+  },
+  "v2": {
+    "experiment_id": "E4",
+    "experiment_name": "e4_random_forest",
+    "mlflow_run_id": "ef3b2eaf90874ea5ae5b4b867327f00d",
+    "git_commit_training": "ecbb4899184b23336917b40f32269aff490e89b5",
+    "dvc_prepared_md5": "f6594eb80f87d21c69d1e10c46c0de5f.dir",
+    "dvc_raw_md5": "fe93051ae209ffb0128a31e7a478c009.dir",
+    "model_family": "tree",
+    "model_file_sha256": "03d398894717439d1e4bc20112309bf0a6a10a5727e2af4349e3baca2ad38a81",
+    "threshold": 0.64,
+    "threshold_rule": "y_pred = 1 si score_attack >= threshold",
+    "validation_metrics_at_threshold": {
+      "recall_attack": 0.95114858970631,
+      "precision_attack": 0.9766261462998507,
+      "fpr": 0.04926728400611346,
+      "macro_f1": 0.9441747983432613,
+      "accuracy": 0.9510171610410274,
+      "tp": 22897,
+      "fp": 548,
+      "tn": 10575,
+      "fn": 1176,
+      "n": 35196
+    },
+    "reason": "Modelo: E4 tiene el mayor macro-F1 de validación con umbral 0.5 (0.9470). Umbral: Mínima FPR con recall de ataque >= 0.95 en validación (rejilla 0.01-0.99). En 0.5 tenía recall 0.9788 y FPR 0.0970; con 0.64 recall 0.9511 y FPR 0.0493."
+  },
+  "test_used_for_selection": false,
+  "huggingface": null
+}
