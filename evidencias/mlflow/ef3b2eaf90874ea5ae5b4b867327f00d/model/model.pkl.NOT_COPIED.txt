@@ -1,1 +1,0 @@
-Pickle > 5 MB; recuperarlo desde MLflow (run ID) o Hugging Face (SHA en seleccion.json).
