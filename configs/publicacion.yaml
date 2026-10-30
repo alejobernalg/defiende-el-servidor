@@ -1,4 +1,4 @@
 # Destinos de publicación (sin credenciales: se usan `gh auth login` y `hf auth login`).
 github_repo: alejobernalg/defiende-el-servidor
-hf_model_repo: HF_USER/defiende-el-servidor-unsw-nb15
-hf_dvc_repo: HF_USER/defiende-el-servidor-dvc-storage
+hf_model_repo: AlejandroLiberato/defiende-el-servidor-unsw-nb15
+hf_dvc_repo: AlejandroLiberato/defiende-el-servidor-dvc-storage

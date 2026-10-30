@@ -1,0 +1,4 @@
+[core]
+    remote = hfstore
+['remote "hfstore"']
+    url = https://huggingface.co/datasets/AlejandroLiberato/defiende-el-servidor-dvc-storage/resolve/main

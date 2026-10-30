@@ -20,6 +20,7 @@ git log -1 --format='%H %s'
 python3.12 -m venv "$WORK/venv"
 source "$WORK/venv/bin/activate"
 pip install -q -r requirements.txt
+export SSL_CERT_FILE=$(python -m certifi)   # Python de python.org en macOS no trae CA del sistema
 pip freeze | grep -iE '^(scikit-learn|pandas|numpy|dvc|huggingface.hub|mlflow)=='
 # 2. Datos desde el remote DVC entregado (caché .dvc/cache vacía en el clon nuevo)
 dvc remote list
