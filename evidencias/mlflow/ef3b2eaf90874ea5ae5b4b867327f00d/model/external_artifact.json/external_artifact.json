@@ -1,0 +1,12 @@
+{
+  "run_id": "ef3b2eaf90874ea5ae5b4b867327f00d",
+  "experiment_id": "E4",
+  "artifact_note": "The exported MLflow pickle exceeds the 5 MB export limit and is not included here. The complete evaluated v2 model is publicly downloadable from Hugging Face at the immutable revision below. This is a separate serialized file; do not assume it is byte-identical to MLflow's omitted model.pkl.",
+  "huggingface_repo": "AlejandroLiberato/defiende-el-servidor-unsw-nb15",
+  "evaluated_revision_sha": "6282a4d6e05d473f37d0243f3bfa18b10116586e",
+  "evaluated_file": "model.joblib",
+  "evaluated_file_size_bytes": 171130331,
+  "evaluated_file_sha256": "03d398894717439d1e4bc20112309bf0a6a10a5727e2af4349e3baca2ad38a81",
+  "model_card_revision_sha": "bfdc6b94b54b1ed7febc7c45bd970c2b75d1e37a",
+  "selection_record": "evidencias/seleccion.json"
+}
