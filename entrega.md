@@ -1,7 +1,5 @@
 # Entrega — MLOps — Defiende el servidor
 
-> Los dos campos marcados **PENDIENTE** (al final) los completan los integrantes.
-
 ## Integrantes y repositorio
 - Integrantes: Luna Lugo — Grupo B; Alejandro Bernal — Grupo B
 - Asunto: `MLOps — Defiende el servidor — Grupo B — Luna Lugo, Alejandro Bernal`
@@ -58,9 +56,10 @@
 - El umbral de v2 se elige en la misma validación en la que se reportan sus métricas.
 - En el mirror usado los archivos venían con los nombres intercambiados; se asignaron por SHA-256.
 
+
+
 ## Uso de IA, código externo y contribuciones
-- Se usó Claude Code (Anthropic) como asistente para escribir scripts, configurar DVC/MLflow/Hugging Face y
-  redactar documentación. **PENDIENTE: describir qué verificaste tú** (p. ej., revisión de splits, métricas
-  recalculadas, prueba de recuperación, lectura del código).
+- Se usó Claude Code (Anthropic) para apoyar la escritura de scripts, la configuración de DVC/MLflow/Hugging Face y la documentación. También se usó Codex para contrastar esta entrega con la guía y revisar las evidencias pendientes. Las comprobaciones reproducibles guardadas incluyen la auditoría de fuentes y SHA-256, la asignación de grupos sin cruces entre train y validación, las métricas recalculables de test y la recuperación de v1/v2 sobre las mismas 25 filas de validación. Las predicciones recuperadas conservan `y_pred`; la diferencia máxima de puntuación fue 0.0 para v1 y 2.2e-16 para v2 (tolerancia 1e-9).
 - No se adaptó código externo más allá de la documentación oficial de scikit-learn, MLflow, DVC y Hugging Face.
-- Contribución de cada integrante: **PENDIENTE**.
+- Trazabilidad de commits: el historial de GitHub registra los commits de la entrega bajo la cuenta `alejobernalg` (Alejandro Bernal). Entre ellos están el commit `ecbb4899184b23336917b40f32269aff490e89b5` (cuatro experimentos), `b51c29ba1865cbab701223bd335650084c5dcf78` (análisis de errores y model card), `c62c2544eb6047ab026f86d42809e47b1a662cb4` (prueba de recuperación e informe) y `9ef6b14ec1964d526da92dee9ca500c831cfa28b` (script para generar el ZIP).
+- Contribución de los integrantes: Luna Lugo y Alejandro Bernal trabajaron conjuntamente en el proyecto y comparten las decisiones, implementación, experimentos, documentación y verificación descritos en esta entrega. Alejandro publicó los commits desde su cuenta `alejobernalg`; por ello el historial identifica esa cuenta como autora de las publicaciones, aunque el trabajo se realizó en conjunto.
