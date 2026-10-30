@@ -1,0 +1,19 @@
+{
+  "download": {
+    "date": "2026-10-29",
+    "official_reference": "https://research.unsw.edu.au/projects/unsw-nb15-dataset (Moustafa & Slay, 2015)",
+    "access_used": "Copia de terceros en GitHub (Git LFS): https://github.com/jamshaid120/UNSW_NB15-Complete-dataset",
+    "license_note": "Uso académico; citar Moustafa & Slay (2015, 2016) según la página oficial de UNSW."
+  },
+  "content_check": "En el mirror los nombres estaban INTERCAMBIADOS: el archivo publicado como UNSW_NB15_training-set.csv tenía 82.332 filas y la huella del test del anexo, y viceversa. Se asignó cada archivo por SHA-256 y número de filas, no por su nombre.",
+  "files": {
+    "UNSW_NB15_training-set.csv": {
+      "downloaded_from": "https://media.githubusercontent.com/media/jamshaid120/UNSW_NB15-Complete-dataset/main/UNSW_NB15_testing-set.csv",
+      "name_in_mirror": "UNSW_NB15_testing-set.csv"
+    },
+    "UNSW_NB15_testing-set.csv": {
+      "downloaded_from": "https://media.githubusercontent.com/media/jamshaid120/UNSW_NB15-Complete-dataset/main/UNSW_NB15_training-set.csv",
+      "name_in_mirror": "UNSW_NB15_training-set.csv"
+    }
+  }
+}
