@@ -25,7 +25,7 @@
 |---|---|
 | Auditoría de datos y splits | `evidencias/auditoria.json`, `data/prepared/manifest.json` (vía DVC), `data/fuentes.json` |
 | Tabla de experimentos | `evidencias/experimentos.csv` |
-| Registros MLflow exportados | `evidencias/mlflow/` (`runs.csv`, `runs.json`, una carpeta por run ID) |
+| Registros MLflow exportados | `evidencias/mlflow/` (`runs.csv`, `runs.json`, una carpeta por run ID). El pickle grande de E4 no está duplicado en el ZIP; `model.joblib` se recupera por revisión v2 inmutable de Hugging Face. Es una serialización distinta, no byte a byte idéntica a `model.pkl`; SHA y run ID: `evidencias/mlflow/ef3b2eaf90874ea5ae5b4b867327f00d/model/external_artifact.json`. |
 | Selección congelada | `evidencias/seleccion.json` (commit `f7d4ffa…`, anterior al test) |
 | Test final | `evidencias/metricas-test.json`, `evidencias/predicciones-test.csv` (recalcular: `python src/recompute_test_metrics.py`) |
 | Análisis de errores (posterior al test, descriptivo) | `evidencias/analisis-errores.json` |
@@ -61,5 +61,5 @@
 ## Uso de IA, código externo y contribuciones
 - Se usó Claude Code (Anthropic) para apoyar la escritura de scripts, la configuración de DVC/MLflow/Hugging Face y la documentación. También se usó Codex para contrastar esta entrega con la guía y revisar las evidencias pendientes. Las comprobaciones reproducibles guardadas incluyen la auditoría de fuentes y SHA-256, la asignación de grupos sin cruces entre train y validación, las métricas recalculables de test y la recuperación de v1/v2 sobre las mismas 25 filas de validación. Las predicciones recuperadas conservan `y_pred`; la diferencia máxima de puntuación fue 0.0 para v1 y 2.2e-16 para v2 (tolerancia 1e-9).
 - No se adaptó código externo más allá de la documentación oficial de scikit-learn, MLflow, DVC y Hugging Face.
-- Trazabilidad de commits: el historial de GitHub registra los commits de la entrega bajo la cuenta `alejobernalg` (Alejandro Bernal). Entre ellos están el commit `ecbb4899184b23336917b40f32269aff490e89b5` (cuatro experimentos), `b51c29ba1865cbab701223bd335650084c5dcf78` (análisis de errores y model card), `c62c2544eb6047ab026f86d42809e47b1a662cb4` (prueba de recuperación e informe) y `9ef6b14ec1964d526da92dee9ca500c831cfa28b` (script para generar el ZIP).
-- Contribución de los integrantes: Luna Lugo y Alejandro Bernal trabajaron conjuntamente en el proyecto y comparten las decisiones, implementación, experimentos, documentación y verificación descritos en esta entrega. Alejandro publicó los commits desde su cuenta `alejobernalg`; por ello el historial identifica esa cuenta como autora de las publicaciones, aunque el trabajo se realizó en conjunto.
+- Trazabilidad de commits: los commits de desarrollo y la entrega original se publicaron desde `alejobernalg` (Alejandro Bernal). La aclaración y los ajustes finales de documentación se publican desde `lunalugoeuc-a11y` (Luna Lugo). El historial indica la cuenta que publicó cada cambio; Luna y Alejandro trabajaron conjuntamente en el proyecto.
+- Contribución de los integrantes: Luna Lugo y Alejandro Bernal realizaron en conjunto las decisiones, implementación, experimentos, documentación y verificaciones de este proyecto.
