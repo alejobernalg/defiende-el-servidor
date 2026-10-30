@@ -1,0 +1,9 @@
+# Regla de selección para v2 definida ANTES de ver los resultados. Usa solo validación.
+model_rule: "Mayor macro-F1 de validación con umbral 0.5 entre E1-E4; empate -> menor FPR."
+threshold_rule:
+  description: >-
+    Para un equipo de seguridad perder ataques es costoso, pero cada falso positivo es una alerta que
+    alguien revisa. Se elige el umbral que MINIMIZA la FPR manteniendo recall de ataque >= 0.95 en
+    validación. Si ninguno cumple, se usa el umbral que maximiza macro-F1.
+  min_recall_attack: 0.95
+  grid: {start: 0.01, stop: 0.99, step: 0.01}

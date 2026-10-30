@@ -1,0 +1,12 @@
+id: E3
+name: e3_decision_tree
+family: tree
+hypothesis: >-
+  Un árbol de decisión capta umbrales e interacciones no lineales (p. ej. sttl x state) que el modelo
+  lineal no representa; esperamos más recall de ataque con FPR similar.
+change: "Familia de modelo: árbol de decisión (max_depth=12, min_samples_leaf=20); no necesita escalado."
+model: decision_tree
+params: {max_depth: 12, min_samples_leaf: 20}
+preprocessing: {log1p_numeric: false}
+threshold: 0.5
+seed: 42

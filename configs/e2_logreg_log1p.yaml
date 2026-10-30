@@ -1,0 +1,12 @@
+id: E2
+name: e2_logreg_log1p
+family: logistic_regression
+hypothesis: >-
+  Las variables de bytes, cargas y tiempos tienen colas muy pesadas; aplicar log1p antes de escalar
+  hará el problema más lineal y mejorará macro-F1 y reducirá falsos positivos frente a E1.
+change: "Preprocesamiento: log1p sobre variables numéricas antes de StandardScaler (mismo modelo que E1)."
+model: logistic_regression
+params: {C: 1.0, max_iter: 3000, solver: lbfgs}
+preprocessing: {log1p_numeric: true}
+threshold: 0.5
+seed: 42

@@ -1,0 +1,12 @@
+id: E1
+name: e1_logreg_base
+family: logistic_regression
+hypothesis: >-
+  Una referencia lineal sencilla (one-hot de proto/service/state + escalado estándar) separa la mayoría
+  de ataques porque variables como sttl, ct_state_ttl y sbytes ya son muy informativas.
+change: Referencia (línea base). Sin cambios previos.
+model: logistic_regression
+params: {C: 1.0, max_iter: 3000, solver: lbfgs}
+preprocessing: {log1p_numeric: false}
+threshold: 0.5
+seed: 42
