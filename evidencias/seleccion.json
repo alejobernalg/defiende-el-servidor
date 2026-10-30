@@ -82,6 +82,12 @@
       "tag": "v2",
       "commit_url": "https://huggingface.co/AlejandroLiberato/defiende-el-servidor-unsw-nb15/commit/6282a4d6e05d473f37d0243f3bfa18b10116586e",
       "model_file_sha256": "03d398894717439d1e4bc20112309bf0a6a10a5727e2af4349e3baca2ad38a81"
+    },
+    "v2_card_with_test": {
+      "revision_sha": "bfdc6b94b54b1ed7febc7c45bd970c2b75d1e37a",
+      "commit_url": "https://huggingface.co/AlejandroLiberato/defiende-el-servidor-unsw-nb15/commit/bfdc6b94b54b1ed7febc7c45bd970c2b75d1e37a",
+      "evaluated_revision_sha": "6282a4d6e05d473f37d0243f3bfa18b10116586e",
+      "model_file_sha256_unchanged": "03d398894717439d1e4bc20112309bf0a6a10a5727e2af4349e3baca2ad38a81"
     }
   }
 }

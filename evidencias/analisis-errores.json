@@ -1,0 +1,213 @@
+{
+  "version": "v2",
+  "threshold": 0.64,
+  "note": "Descriptivo, calculado después de la evaluación final; no se usó para ajustar nada.",
+  "validation": {
+    "rows": 35196,
+    "normal_share": 0.316,
+    "fpr_by_service": {
+      "-": {
+        "rows": 7256,
+        "fpr": 0.0597
+      },
+      "dns": {
+        "rows": 1531,
+        "fpr": 0.0007
+      },
+      "http": {
+        "rows": 1066,
+        "fpr": 0.076
+      },
+      "ftp-data": {
+        "rows": 479,
+        "fpr": 0.0
+      },
+      "smtp": {
+        "rows": 316,
+        "fpr": 0.0063
+      },
+      "ssh": {
+        "rows": 239,
+        "fpr": 0.0
+      },
+      "ftp": {
+        "rows": 236,
+        "fpr": 0.1314
+      }
+    },
+    "fpr_by_state": {
+      "FIN": {
+        "rows": 7310,
+        "fpr": 0.0517
+      },
+      "CON": {
+        "rows": 2455,
+        "fpr": 0.0004
+      },
+      "INT": {
+        "rows": 1174,
+        "fpr": 0.1422
+      },
+      "REQ": {
+        "rows": 168,
+        "fpr": 0.0119
+      },
+      "RST": {
+        "rows": 13,
+        "fpr": 0.0
+      },
+      "ECO": {
+        "rows": 1,
+        "fpr": 0.0
+      },
+      "PAR": {
+        "rows": 1,
+        "fpr": 0.0
+      },
+      "no": {
+        "rows": 1,
+        "fpr": 0.0
+      }
+    },
+    "recall_by_attack_cat": {
+      "Generic": {
+        "rows": 7585,
+        "recall_attack": 0.9999
+      },
+      "Exploits": {
+        "rows": 6868,
+        "recall_attack": 0.991
+      },
+      "Fuzzers": {
+        "rows": 3712,
+        "recall_attack": 0.7182
+      },
+      "DoS": {
+        "rows": 2547,
+        "recall_attack": 0.9976
+      },
+      "Reconnaissance": {
+        "rows": 2380,
+        "recall_attack": 0.9992
+      },
+      "Analysis": {
+        "rows": 377,
+        "recall_attack": 0.8621
+      },
+      "Backdoor": {
+        "rows": 358,
+        "recall_attack": 1.0
+      },
+      "Shellcode": {
+        "rows": 222,
+        "recall_attack": 0.9685
+      },
+      "Worms": {
+        "rows": 24,
+        "recall_attack": 1.0
+      }
+    }
+  },
+  "test": {
+    "rows": 82332,
+    "normal_share": 0.4494,
+    "fpr_by_service": {
+      "-": {
+        "rows": 27375,
+        "fpr": 0.2004
+      },
+      "http": {
+        "rows": 4013,
+        "fpr": 0.1729
+      },
+      "dns": {
+        "rows": 3068,
+        "fpr": 0.0003
+      },
+      "ftp-data": {
+        "rows": 949,
+        "fpr": 0.0
+      },
+      "ftp": {
+        "rows": 758,
+        "fpr": 0.2823
+      },
+      "smtp": {
+        "rows": 635,
+        "fpr": 0.0
+      },
+      "ssh": {
+        "rows": 200,
+        "fpr": 0.0
+      },
+      "radius": {
+        "rows": 2,
+        "fpr": 1.0
+      }
+    },
+    "fpr_by_state": {
+      "FIN": {
+        "rows": 24172,
+        "fpr": 0.1754
+      },
+      "CON": {
+        "rows": 6633,
+        "fpr": 0.0005
+      },
+      "INT": {
+        "rows": 4485,
+        "fpr": 0.4765
+      },
+      "REQ": {
+        "rows": 1707,
+        "fpr": 0.0088
+      },
+      "ACC": {
+        "rows": 2,
+        "fpr": 0.0
+      },
+      "RST": {
+        "rows": 1,
+        "fpr": 1.0
+      }
+    },
+    "recall_by_attack_cat": {
+      "Generic": {
+        "rows": 18871,
+        "recall_attack": 0.9999
+      },
+      "Exploits": {
+        "rows": 11132,
+        "recall_attack": 0.9915
+      },
+      "Fuzzers": {
+        "rows": 6062,
+        "recall_attack": 0.7638
+      },
+      "DoS": {
+        "rows": 4089,
+        "recall_attack": 0.9978
+      },
+      "Reconnaissance": {
+        "rows": 3496,
+        "recall_attack": 0.998
+      },
+      "Analysis": {
+        "rows": 677,
+        "recall_attack": 0.9911
+      },
+      "Backdoor": {
+        "rows": 583,
+        "recall_attack": 1.0
+      },
+      "Shellcode": {
+        "rows": 378,
+        "recall_attack": 0.9815
+      },
+      "Worms": {
+        "rows": 44,
+        "recall_attack": 1.0
+      }
+    }
+  }
+}
