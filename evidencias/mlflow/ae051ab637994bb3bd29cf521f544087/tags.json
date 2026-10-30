@@ -1,0 +1,23 @@
+{
+  "mlflow.user": "alejandrobernal",
+  "mlflow.source.name": "src/train.py",
+  "mlflow.source.type": "LOCAL",
+  "mlflow.source.git.commit": "ecbb4899184b23336917b40f32269aff490e89b5",
+  "mlflow.source.git.branch": "main",
+  "mlflow.runName": "e1_logreg_base",
+  "exp_id": "E1",
+  "family": "logistic_regression",
+  "hypothesis": "Una referencia lineal sencilla (one-hot de proto/service/state + escalado estándar) separa la mayoría de ataques porque variables como sttl, ct_state_ttl y sbytes ya son muy informativas.",
+  "change": "Referencia (línea base). Sin cambios previos.",
+  "git_commit": "ecbb4899184b23336917b40f32269aff490e89b5",
+  "config_file": "configs/e1_logreg_base.yaml",
+  "dvc_raw_md5": "fe93051ae209ffb0128a31e7a478c009.dir",
+  "dvc_prepared_md5": "f6594eb80f87d21c69d1e10c46c0de5f.dir",
+  "train_sha256": "64edf0395e0c51694b62e77f1c460ae1229648fabfdcf6291d23f8c4e5bfa027",
+  "val_sha256": "8ca2c9511d3c8276cab05496cd75b1c1f3834340bc195169e2db9442300f3bf9",
+  "positive_class": "1=ataque",
+  "threshold_rule": "y_pred = 1 si score_attack >= threshold",
+  "zero_division": "denominador cero -> 0.0, listado en zero_denominators",
+  "python": "3.12.0",
+  "sklearn": "1.9.1"
+}

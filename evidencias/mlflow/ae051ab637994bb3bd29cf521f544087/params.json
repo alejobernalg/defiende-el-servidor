@@ -1,0 +1,11 @@
+{
+  "model": "logistic_regression",
+  "seed": "42",
+  "threshold": "0.5",
+  "log1p_numeric": "False",
+  "n_train": "140145",
+  "n_val": "35196",
+  "model__C": "1.0",
+  "model__max_iter": "3000",
+  "model__solver": "lbfgs"
+}

@@ -1,0 +1,16 @@
+{
+  "val_threshold": 0.5,
+  "val_recall_attack": 0.9869563411290657,
+  "val_precision_attack": 0.9246186176836861,
+  "val_fpr": 0.17414366627708353,
+  "val_f1_attack": 0.9547710422150334,
+  "val_macro_f1": 0.9228105320176656,
+  "val_accuracy": 0.9360438686214343,
+  "val_tp": 23759.0,
+  "val_fp": 1937.0,
+  "val_tn": 9186.0,
+  "val_fn": 314.0,
+  "val_n": 35196.0,
+  "val_roc_auc": 0.9842851491238109,
+  "fit_seconds": 4.822845935821533
+}

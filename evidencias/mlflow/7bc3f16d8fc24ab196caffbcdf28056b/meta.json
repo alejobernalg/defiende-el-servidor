@@ -1,0 +1,12 @@
+{
+  "run_id": "7bc3f16d8fc24ab196caffbcdf28056b",
+  "run_name": "e3_decision_tree",
+  "experiment": "defiende-el-servidor",
+  "experiment_id": "1",
+  "status": "FINISHED",
+  "start_time_ms": 1793319007015,
+  "end_time_ms": 1793319012137,
+  "logged_models": [
+    "m-b88297f16ddf4efda8a9fb0e909ace38"
+  ]
+}

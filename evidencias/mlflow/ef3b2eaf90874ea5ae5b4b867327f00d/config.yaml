@@ -1,0 +1,17 @@
+id: E4
+name: e4_random_forest
+family: tree
+hypothesis: Un bosque aleatorio promedia muchos árboles y reduce la varianza de E3;
+  esperamos mejor macro-F1 y puntuaciones más calibradas para elegir umbral.
+change: 'Hiperparámetros/ensamble: RandomForest de 300 árboles (min_samples_leaf=2,
+  max_features=sqrt).'
+model: random_forest
+params:
+  n_estimators: 300
+  min_samples_leaf: 2
+  max_features: sqrt
+  n_jobs: -1
+preprocessing:
+  log1p_numeric: false
+threshold: 0.5
+seed: 42

@@ -1,0 +1,12 @@
+{
+  "run_id": "04da9b28db9c44929116528147acdb3b",
+  "run_name": "e2_logreg_log1p",
+  "experiment": "defiende-el-servidor",
+  "experiment_id": "1",
+  "status": "FINISHED",
+  "start_time_ms": 1793318991344,
+  "end_time_ms": 1793318996790,
+  "logged_models": [
+    "m-ada2fe866ff547f6aa0c37d2c53d2d78"
+  ]
+}

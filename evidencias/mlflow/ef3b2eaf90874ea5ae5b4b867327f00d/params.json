@@ -1,0 +1,12 @@
+{
+  "model": "random_forest",
+  "seed": "42",
+  "threshold": "0.5",
+  "log1p_numeric": "False",
+  "n_train": "140145",
+  "n_val": "35196",
+  "model__n_estimators": "300",
+  "model__min_samples_leaf": "2",
+  "model__max_features": "sqrt",
+  "model__n_jobs": "-1"
+}

@@ -1,0 +1,10 @@
+{
+  "model": "decision_tree",
+  "seed": "42",
+  "threshold": "0.5",
+  "log1p_numeric": "False",
+  "n_train": "140145",
+  "n_val": "35196",
+  "model__max_depth": "12",
+  "model__min_samples_leaf": "20"
+}

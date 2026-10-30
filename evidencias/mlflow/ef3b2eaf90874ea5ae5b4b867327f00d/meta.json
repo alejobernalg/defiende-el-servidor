@@ -1,0 +1,12 @@
+{
+  "run_id": "ef3b2eaf90874ea5ae5b4b867327f00d",
+  "run_name": "e4_random_forest",
+  "experiment": "defiende-el-servidor",
+  "experiment_id": "1",
+  "status": "FINISHED",
+  "start_time_ms": 1793319072121,
+  "end_time_ms": 1793319079943,
+  "logged_models": [
+    "m-11417f4950534d2fab30d7fc64999225"
+  ]
+}

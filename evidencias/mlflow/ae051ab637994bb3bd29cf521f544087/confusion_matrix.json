@@ -1,0 +1,18 @@
+{
+  "labels": [
+    "0=normal",
+    "1=ataque"
+  ],
+  "matrix": [
+    [
+      9186,
+      1937
+    ],
+    [
+      314,
+      23759
+    ]
+  ],
+  "rows": "real",
+  "cols": "predicho"
+}
