@@ -1,0 +1,60 @@
+{
+  "evaluated_at_utc": "2026-10-30T01:14:38+00:00",
+  "version": "v2",
+  "huggingface_repo": "AlejandroLiberato/defiende-el-servidor-unsw-nb15",
+  "huggingface_revision_sha": "6282a4d6e05d473f37d0243f3bfa18b10116586e",
+  "model_file_sha256": "03d398894717439d1e4bc20112309bf0a6a10a5727e2af4349e3baca2ad38a81",
+  "mlflow_run_id": "ef3b2eaf90874ea5ae5b4b867327f00d",
+  "evaluation_code_commit": "d26c7a8875add38b4d0d1133623033a9a218c9ca",
+  "dataset": {
+    "file": "data/raw/UNSW_NB15_testing-set.csv",
+    "sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
+    "dvc_raw_md5": "fe93051ae209ffb0128a31e7a478c009.dir",
+    "rows_in_file": 82332
+  },
+  "rows_evaluated": 82332,
+  "threshold": 0.64,
+  "decision_rule": "y_pred = 1 si score_attack >= threshold",
+  "positive_class": "1 = ataque",
+  "zero_division_policy": "denominador cero -> 0.0 y se lista en zero_denominators",
+  "confusion_matrix": {
+    "rows": "real",
+    "cols": "predicho",
+    "labels": [
+      "0=normal",
+      "1=ataque"
+    ],
+    "matrix": [
+      [
+        30604,
+        6396
+      ],
+      [
+        1558,
+        43774
+      ]
+    ]
+  },
+  "metrics": {
+    "recall_attack": 0.965631342098297,
+    "precision_attack": 0.8725134542555312,
+    "fpr": 0.17286486486486485,
+    "f1_attack": 0.9167137860987205,
+    "macro_f1": 0.9008542181700913,
+    "accuracy": 0.903391148034786,
+    "zero_denominators": []
+  },
+  "validation_metrics_same_threshold": {
+    "recall_attack": 0.95114858970631,
+    "precision_attack": 0.9766261462998507,
+    "fpr": 0.04926728400611346,
+    "macro_f1": 0.9441747983432613,
+    "accuracy": 0.9510171610410274,
+    "tp": 22897,
+    "fp": 548,
+    "tn": 10575,
+    "fn": 1176,
+    "n": 35196
+  },
+  "recompute": "python src/recompute_test_metrics.py"
+}
