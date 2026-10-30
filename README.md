@@ -11,7 +11,7 @@ Código: commit Git → Datos: referencia DVC → Experimento: run ID MLflow →
 | Código | este repositorio; tags `code-v1`, `code-v2` |
 | Datos | `data/raw.dvc` (archivos recibidos), `data/prepared.dvc` (splits); remote DVC `hfstore` = https://huggingface.co/datasets/AlejandroLiberato/defiende-el-servidor-dvc-storage (lectura HTTP) |
 | Experimentos | MLflow local (`mlflow.db`), exportado en `evidencias/mlflow/` y `evidencias/experimentos.csv` |
-| Modelos | https://huggingface.co/AlejandroLiberato/defiende-el-servidor-unsw-nb15 — `v1` = `8033bee6b22195aa79e007085d680b104256a769`, `v2` = `6282a4d6e05d473f37d0243f3bfa18b10116586e` |
+| Modelos | Hugging Face: revisión v1 `8033bee6b22195aa79e007085d680b104256a769`, v2 `6282a4d6e05d473f37d0243f3bfa18b10116586e`. El modelo grande recuperable y su SHA-256 están descritos en `evidencias/mlflow/ef3b2eaf90874ea5ae5b4b867327f00d/model/external_artifact.json`; no se afirma identidad byte a byte con el pickle de MLflow. |
 
 ## Requisitos
 - Python **3.12** (probado con 3.12 en macOS, CPU).
