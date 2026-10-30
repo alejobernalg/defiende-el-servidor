@@ -9,9 +9,9 @@ Código: commit Git → Datos: referencia DVC → Experimento: run ID MLflow →
 | Pieza | Dónde |
 |---|---|
 | Código | este repositorio; tags `code-v1`, `code-v2` |
-| Datos | `data/raw.dvc` (archivos recibidos), `data/prepared.dvc` (splits); remote DVC `hfstore` (dataset de Hugging Face, lectura HTTP) |
+| Datos | `data/raw.dvc` (archivos recibidos), `data/prepared.dvc` (splits); remote DVC `hfstore` = https://huggingface.co/datasets/AlejandroLiberato/defiende-el-servidor-dvc-storage (lectura HTTP) |
 | Experimentos | MLflow local (`mlflow.db`), exportado en `evidencias/mlflow/` y `evidencias/experimentos.csv` |
-| Modelos | Hugging Face Hub, revisiones `v1` y `v2` (ver `entrega.md` para los SHA completos) |
+| Modelos | https://huggingface.co/AlejandroLiberato/defiende-el-servidor-unsw-nb15 — `v1` = `8033bee6b22195aa79e007085d680b104256a769`, `v2` = `6282a4d6e05d473f37d0243f3bfa18b10116586e` |
 
 ## Requisitos
 - Python **3.12** (probado con 3.12 en macOS, CPU).
@@ -30,6 +30,7 @@ pip install -r requirements.txt
 ## Recuperar los datos (DVC)
 ```bash
 dvc pull                       # remote por defecto: hfstore (HTTP, no requiere credenciales)
+# macOS con Python de python.org y error CERTIFICATE_VERIFY_FAILED: export SSL_CERT_FILE=$(python -m certifi)
 shasum -a 256 data/raw/*.csv   # comparar con evidencias/auditoria.json
 ```
 Versiones de datos:
@@ -74,7 +75,8 @@ O con la línea de comandos incluida en cada revisión:
 
 ## Prueba de recuperación en entorno nuevo
 ```bash
-bash scripts/recuperacion.sh https://github.com/alejobernalg/defiende-el-servidor.git <commit> <sha-v1> <sha-v2>
+bash scripts/recuperacion.sh https://github.com/alejobernalg/defiende-el-servidor.git <commit> \
+  8033bee6b22195aa79e007085d680b104256a769 6282a4d6e05d473f37d0243f3bfa18b10116586e
 ```
 Clona en una carpeta temporal, crea un venv nuevo, hace `dvc pull` sin caché, verifica huellas, descarga
 v1 y v2 por SHA, predice las 25 filas fijas y compara con las salidas guardadas.
@@ -89,7 +91,8 @@ python src/recompute_test_metrics.py # recalcula métricas desde evidencias/pred
 ```
 configs/      e1..e4 (experimentos), seleccion.yaml (regla pre-registrada), publicacion.yaml
 src/          common, prepare, audit, train, export_mlflow, select_model, publish_hf, predict,
-              evaluate_test, recompute_test_metrics, recover
+              evaluate_test, recompute_test_metrics, recover, error_analysis, card_add_test
+informe/      informe.html (fuente) e informe.pdf
 scripts/      publicar_dvc.sh, recuperacion.sh
 data/         raw.dvc, prepared.dvc, fuentes.json
 evidencias/   auditoria.json, experimentos.csv, seleccion.json, metricas-test.json,

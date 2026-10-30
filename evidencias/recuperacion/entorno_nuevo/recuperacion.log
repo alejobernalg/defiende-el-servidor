@@ -1,0 +1,185 @@
++ date -u
+Fri Oct 30 01:16:04 UTC 2026
++ uname -a
+Darwin MacBook-Pro.local 22.6.0 Darwin Kernel Version 22.6.0: Tue Jul 15 08:22:28 PDT 2025; root:xnu-8796.141.3.713.2~2/RELEASE_X86_64 x86_64
++ python3.12 --version
+Python 3.12.0
++ git clone https://github.com/alejobernalg/defiende-el-servidor.git /private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/repo
+Cloning into '/private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/repo'...
++ cd /private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/repo
++ git checkout b51c29ba1865cbab701223bd335650084c5dcf78
+Note: switching to 'b51c29ba1865cbab701223bd335650084c5dcf78'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at b51c29b Análisis descriptivo de errores (val vs test) y model card de v2 con el test final (nueva revisión HF; model.joblib sin cambios)
++ git log -1 '--format=%H %s'
+b51c29ba1865cbab701223bd335650084c5dcf78 Análisis descriptivo de errores (val vs test) y model card de v2 con el test final (nueva revisión HF; model.joblib sin cambios)
++ python3.12 -m venv /private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/venv
++ source /private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/venv/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ '[' darwin22 = cygwin ']'
+++ '[' darwin22 = msys ']'
+++ export VIRTUAL_ENV=/private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/venv
+++ VIRTUAL_ENV=/private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/venv
+++ _OLD_VIRTUAL_PATH=/Users/alejandrobernal/.local/bin:/Users/alejandrobernal/.antigravity/antigravity/bin:/Users/alejandrobernal/.antigravity/antigravity/bin:/Users/alejandrobernal/.nvm/versions/node/v24.11.1/bin:/usr/local/bin:/usr/local/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/alejandrobernal/.local/bin:/Users/alejandrobernal/.antigravity/antigravity/bin:/Users/alejandrobernal/.nvm/versions/node/v24.11.1/bin:/opt/anaconda3/condabin:/usr/local/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/Library/Frameworks/Python.framework/Versions/3.13/bin
+++ PATH=/private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/venv/bin:/Users/alejandrobernal/.local/bin:/Users/alejandrobernal/.antigravity/antigravity/bin:/Users/alejandrobernal/.antigravity/antigravity/bin:/Users/alejandrobernal/.nvm/versions/node/v24.11.1/bin:/usr/local/bin:/usr/local/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/alejandrobernal/.local/bin:/Users/alejandrobernal/.antigravity/antigravity/bin:/Users/alejandrobernal/.nvm/versions/node/v24.11.1/bin:/opt/anaconda3/condabin:/usr/local/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/Library/Frameworks/Python.framework/Versions/3.13/bin
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(venv) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(venv) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
++ pip install -q -r requirements.txt
+
+[notice] A new release of pip is available: 23.2.1 -> 26.2.2
+[notice] To update, run: pip install --upgrade pip
+++ python -m certifi
++ export SSL_CERT_FILE=/private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/venv/lib/python3.12/site-packages/certifi/cacert.pem
++ SSL_CERT_FILE=/private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/venv/lib/python3.12/site-packages/certifi/cacert.pem
++ pip freeze
++ grep -iE '^(scikit-learn|pandas|numpy|dvc|huggingface.hub|mlflow)=='
+dvc==3.67.1
+huggingface_hub==2.4.0
+mlflow==3.17.2
+numpy==2.5.4
+pandas==3.1.0
+scikit-learn==1.9.1
++ dvc remote list
+hfstore 
+https://huggingface.co/datasets/AlejandroLiberato/defiende-el-servidor-dvc-stora
+ge/resolve/main (default)
++ test '!' -d .dvc/cache
++ dvc pull
+A       data/prepared/
+A       data/raw/
+8 files fetched and 6 files added
++ dvc status
+Data and pipelines are up to date.
++ shasum -a 256 data/raw/UNSW_NB15_testing-set.csv data/raw/UNSW_NB15_training-set.csv data/prepared/splits.csv data/prepared/train.csv data/prepared/val.csv
+734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559  data/raw/UNSW_NB15_testing-set.csv
+bec7dd5ec88dc2a0ccc7a07879d338395ed7421750f675fd0339e07dfe0648fa  data/raw/UNSW_NB15_training-set.csv
+749188babf019cf8448965e4ba9bf34b38facb7c36892f58cb1e358698a20eaf  data/prepared/splits.csv
+64edf0395e0c51694b62e77f1c460ae1229648fabfdcf6291d23f8c4e5bfa027  data/prepared/train.csv
+8ca2c9511d3c8276cab05496cd75b1c1f3834340bc195169e2db9442300f3bf9  data/prepared/val.csv
++ python -
+{
+ "data/raw/UNSW_NB15_training-set.csv": true,
+ "data/raw/UNSW_NB15_testing-set.csv": true,
+ "data/prepared/train.csv": true,
+ "data/prepared/val.csv": true,
+ "data/prepared/splits.csv": true
+}
+HUELLAS DE DATOS OK
++ OUT=evidencias/recuperacion/entorno_nuevo
++ python src/recover.py --version v1 --revision 8033bee6b22195aa79e007085d680b104256a769 --cache-dir /private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/hf_home/hub --out-dir evidencias/recuperacion/entorno_nuevo
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 6 files:  17%|█▋        | 1/6 [00:00<00:03,  1.38it/s]Fetching 6 files:  33%|███▎      | 2/6 [00:00<00:01,  2.64it/s]Fetching 6 files:  83%|████████▎ | 5/6 [00:01<00:00,  6.78it/s]Fetching 6 files: 100%|██████████| 6/6 [00:01<00:00,  3.19it/s]
+{
+  "version": "v1",
+  "repo": "AlejandroLiberato/defiende-el-servidor-unsw-nb15",
+  "revision_sha": "8033bee6b22195aa79e007085d680b104256a769",
+  "downloaded_to": "/private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/hf_home/hub/models--AlejandroLiberato--defiende-el-servidor-unsw-nb15/snapshots/8033bee6b22195aa79e007085d680b104256a769",
+  "files": {
+    ".gitattributes": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+    "README.md": "38c7c257d986666883a3e4d160b2cfa7828de7d61db2a3027c5b52f369586a60",
+    "config.json": "e45c211965508cccb50b3f39f8b00c0f5d81207f1d6f4afe7b915bbf2ab71285",
+    "model.joblib": "2f8deb7a64a4607ccca04451e35919d73074f349e67828a4fe8b597547e845c0",
+    "predict.py": "ae04400101ea1b731a69a6f1e1b8da21b2916c47227fa36c6756b587eb4a6b11",
+    "requirements.txt": "7852c17cc3d086ce8ea4c0b05a8b3d37345c3c0acd0082af8d198163740ef52a"
+  },
+  "config_version": "v1",
+  "threshold": 0.5,
+  "mlflow_run_id": "ae051ab637994bb3bd29cf521f544087",
+  "model_file_sha256": "2f8deb7a64a4607ccca04451e35919d73074f349e67828a4fe8b597547e845c0",
+  "rows": 25,
+  "row_ids_equal": true,
+  "y_pred_equal": true,
+  "score_max_abs_diff": 0.0,
+  "tolerance": 1e-09,
+  "y_pred_counts": {
+    "0": 8,
+    "1": 17
+  },
+  "passed": true
+}
++ python src/recover.py --version v2 --revision 6282a4d6e05d473f37d0243f3bfa18b10116586e --cache-dir /private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/hf_home/hub --out-dir evidencias/recuperacion/entorno_nuevo
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 6 files:  17%|█▋        | 1/6 [00:00<00:01,  3.92it/s]Fetching 6 files:  83%|████████▎ | 5/6 [00:00<00:00, 15.67it/s]Fetching 6 files: 100%|██████████| 6/6 [00:06<00:00,  1.05s/it]
+{
+  "version": "v2",
+  "repo": "AlejandroLiberato/defiende-el-servidor-unsw-nb15",
+  "revision_sha": "6282a4d6e05d473f37d0243f3bfa18b10116586e",
+  "downloaded_to": "/private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/hf_home/hub/models--AlejandroLiberato--defiende-el-servidor-unsw-nb15/snapshots/6282a4d6e05d473f37d0243f3bfa18b10116586e",
+  "files": {
+    ".gitattributes": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+    "README.md": "ed1f54d0261c620f61042af74263222c643cfff5329d6a48e330fa51e87c9c1f",
+    "config.json": "469d7312f169b61863ad22005cbd1f23ab70609e1637431cc3b354bf5bbda554",
+    "model.joblib": "03d398894717439d1e4bc20112309bf0a6a10a5727e2af4349e3baca2ad38a81",
+    "predict.py": "ae04400101ea1b731a69a6f1e1b8da21b2916c47227fa36c6756b587eb4a6b11",
+    "requirements.txt": "7852c17cc3d086ce8ea4c0b05a8b3d37345c3c0acd0082af8d198163740ef52a"
+  },
+  "config_version": "v2",
+  "threshold": 0.64,
+  "mlflow_run_id": "ef3b2eaf90874ea5ae5b4b867327f00d",
+  "model_file_sha256": "03d398894717439d1e4bc20112309bf0a6a10a5727e2af4349e3baca2ad38a81",
+  "rows": 25,
+  "row_ids_equal": true,
+  "y_pred_equal": true,
+  "score_max_abs_diff": 2.220446049250313e-16,
+  "tolerance": 1e-09,
+  "y_pred_counts": {
+    "0": 9,
+    "1": 16
+  },
+  "passed": true
+}
++ shasum -a 256 evidencias/recuperacion/entrada_validacion.csv evidencias/recuperacion/salida_v1_original.csv evidencias/recuperacion/salida_v2_original.csv evidencias/recuperacion/entorno_nuevo/salida_v1_recuperada.csv evidencias/recuperacion/entorno_nuevo/salida_v2_recuperada.csv
+dc7f7e44b96a038b53263d68be5e70d08ed9b098b9796cacf87d60ee5de15fb3  evidencias/recuperacion/entrada_validacion.csv
+801072d1d81ff54e805a7d4b284e2053f2841406e0527ef5aa7557628df3d48a  evidencias/recuperacion/salida_v1_original.csv
+2b71ffc3441dfdbab42dec10919f445f106005b28326a65b830110df665919e8  evidencias/recuperacion/salida_v2_original.csv
+801072d1d81ff54e805a7d4b284e2053f2841406e0527ef5aa7557628df3d48a  evidencias/recuperacion/entorno_nuevo/salida_v1_recuperada.csv
+09f708370bfb21bf7bb01fc37e1affa9063653fb2b8e687a8079a00afde2139d  evidencias/recuperacion/entorno_nuevo/salida_v2_recuperada.csv
++ '[' -f evidencias/metricas-test.json ']'
++ python src/recompute_test_metrics.py
+{
+ "rows": 82332,
+ "tp": 43774,
+ "fp": 6396,
+ "tn": 30604,
+ "fn": 1558,
+ "recall_attack": 0.965631342098297,
+ "precision_attack": 0.8725134542555312,
+ "fpr": 0.17286486486486485,
+ "macro_f1": 0.9008542181700913,
+ "rows_violating_threshold_rule": 0
+}
+y_true coincide con data/raw/UNSW_NB15_testing-set.csv: True
+COINCIDE con metricas-test.json
++ set +x
+RECUPERACION OK en /private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604

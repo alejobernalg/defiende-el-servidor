@@ -1,0 +1,28 @@
+{
+  "version": "v2",
+  "repo": "AlejandroLiberato/defiende-el-servidor-unsw-nb15",
+  "revision_sha": "6282a4d6e05d473f37d0243f3bfa18b10116586e",
+  "downloaded_to": "/private/tmp/claude-501/-Users-alejandrobernal-Desktop-visua-taller/22479a60-f7d8-48d6-b734-24b6e174be49/scratchpad/recuperacion_201604/hf_home/hub/models--AlejandroLiberato--defiende-el-servidor-unsw-nb15/snapshots/6282a4d6e05d473f37d0243f3bfa18b10116586e",
+  "files": {
+    ".gitattributes": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+    "README.md": "ed1f54d0261c620f61042af74263222c643cfff5329d6a48e330fa51e87c9c1f",
+    "config.json": "469d7312f169b61863ad22005cbd1f23ab70609e1637431cc3b354bf5bbda554",
+    "model.joblib": "03d398894717439d1e4bc20112309bf0a6a10a5727e2af4349e3baca2ad38a81",
+    "predict.py": "ae04400101ea1b731a69a6f1e1b8da21b2916c47227fa36c6756b587eb4a6b11",
+    "requirements.txt": "7852c17cc3d086ce8ea4c0b05a8b3d37345c3c0acd0082af8d198163740ef52a"
+  },
+  "config_version": "v2",
+  "threshold": 0.64,
+  "mlflow_run_id": "ef3b2eaf90874ea5ae5b4b867327f00d",
+  "model_file_sha256": "03d398894717439d1e4bc20112309bf0a6a10a5727e2af4349e3baca2ad38a81",
+  "rows": 25,
+  "row_ids_equal": true,
+  "y_pred_equal": true,
+  "score_max_abs_diff": 2.220446049250313e-16,
+  "tolerance": 1e-09,
+  "y_pred_counts": {
+    "0": 9,
+    "1": 16
+  },
+  "passed": true
+}

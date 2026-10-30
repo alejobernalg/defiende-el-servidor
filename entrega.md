@@ -1,13 +1,12 @@
 # Entrega — MLOps — Defiende el servidor
 
-> Los campos marcados **PENDIENTE** se completan al publicar en GitHub/Hugging Face y al ejecutar la
-> prueba de recuperación.
+> Los dos campos marcados **PENDIENTE** (al final) los completan los integrantes.
 
 ## Integrantes y repositorio
 - Integrantes: Luna Lugo — Grupo B; Alejandro Bernal — Grupo B
 - Asunto: `MLOps — Defiende el servidor — Grupo B — Luna Lugo, Alejandro Bernal`
 - Repositorio de código: https://github.com/alejobernalg/defiende-el-servidor (público)
-- Commit final de la entrega: **PENDIENTE**
+- Commit final de la entrega: el último commit de `main` (indicado en el mensaje de entrega). La prueba de recuperación se ejecutó sobre `b51c29ba1865cbab701223bd335650084c5dcf78`.
 
 ## Versiones
 | Campo | v1 | v2 |
@@ -18,8 +17,8 @@
 | Datos DVC (prepared) | `data/prepared.dvc` md5 `f6594eb80f87d21c69d1e10c46c0de5f.dir` (commit `8a7a81f4a0631049963f46a37c1614314de8dd46`) | igual |
 | Datos DVC (raw) | `data/raw.dvc` md5 `fe93051ae209ffb0128a31e7a478c009.dir` (commit `119c57a299f4747316f766a6e081c2a318159db3`) | igual |
 | Run ID MLflow | `ae051ab637994bb3bd29cf521f544087` | `ef3b2eaf90874ea5ae5b4b867327f00d` |
-| Repositorio HF | **PENDIENTE** | **PENDIENTE** |
-| SHA revisión HF | **PENDIENTE** (tag `v1`) | **PENDIENTE** (tag `v2`) |
+| Repositorio HF | https://huggingface.co/AlejandroLiberato/defiende-el-servidor-unsw-nb15 | igual |
+| SHA revisión HF | `8033bee6b22195aa79e007085d680b104256a769` (tag `v1`) | `6282a4d6e05d473f37d0243f3bfa18b10116586e` (tag `v2`, revisión evaluada en test). Model card con el test: `bfdc6b94b54b1ed7febc7c45bd970c2b75d1e37a` (mismo `model.joblib`) |
 | SHA-256 `model.joblib` | `2f8deb7a64a4607ccca04451e35919d73074f349e67828a4fe8b597547e845c0` | `03d398894717439d1e4bc20112309bf0a6a10a5727e2af4349e3baca2ad38a81` |
 | Umbral | 0.50 | 0.64 |
 
@@ -30,24 +29,27 @@
 | Tabla de experimentos | `evidencias/experimentos.csv` |
 | Registros MLflow exportados | `evidencias/mlflow/` (`runs.csv`, `runs.json`, una carpeta por run ID) |
 | Selección congelada | `evidencias/seleccion.json` (commit `f7d4ffa…`, anterior al test) |
-| Test final | `evidencias/metricas-test.json`, `evidencias/predicciones-test.csv` |
-| Recuperación | `evidencias/recuperacion/` (entrada fija de 25 filas, salidas originales, `entorno_nuevo/` con salidas recuperadas, comparaciones y log) |
-| Informe | `informe.pdf` (adjunto aparte) |
+| Test final | `evidencias/metricas-test.json`, `evidencias/predicciones-test.csv` (recalcular: `python src/recompute_test_metrics.py`) |
+| Análisis de errores (posterior al test, descriptivo) | `evidencias/analisis-errores.json` |
+| Recuperación | `evidencias/recuperacion/` (ver `LEEME.md`): resultado **OK**; v1 diferencia máx. 0.0, v2 2.2e-16 (tolerancia 1e-9); `y_pred` idéntico en ambas |
+| Informe | `informe/informe.pdf` (fuente `informe/informe.html`) |
 
 ## Almacenamiento DVC
-- Remote por defecto `hfstore`: **PENDIENTE** (dataset de Hugging Face, lectura pública por HTTP; `dvc pull` sin credenciales).
-- Respaldo: la carpeta `.dvc_storage` puede usarse como remote local: `dvc remote add -f -d respaldo <ruta>/.dvc_storage && dvc pull`.
+- Remote por defecto `hfstore`: https://huggingface.co/datasets/AlejandroLiberato/defiende-el-servidor-dvc-storage (dataset público de Hugging Face; `.dvc/config` usa `.../resolve/main` por HTTP; `dvc pull` sin credenciales).
+- Si `dvc pull` falla con `CERTIFICATE_VERIFY_FAILED` (Python de python.org en macOS): `export SSL_CERT_FILE=$(python -m certifi)`.
+- Acceso: los tres repositorios son públicos (GitHub, modelo y dataset de Hugging Face); no se requieren invitaciones ni tokens.
 
 ## Comandos
 - Instalación: `python3.12 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt`
 - Recuperación de datos: `dvc pull`
 - Entrenamiento: `python src/train.py --config configs/e4_random_forest.yaml`
 - Predicción: ver README («Descargar cada modelo y predecir»)
-- Recuperación completa: `bash scripts/recuperacion.sh <git-url> <commit> <sha-v1> <sha-v2>`
+- Recuperación completa: `bash scripts/recuperacion.sh https://github.com/alejobernalg/defiende-el-servidor.git <commit> 8033bee6b22195aa79e007085d680b104256a769 6282a4d6e05d473f37d0243f3bfa18b10116586e`
 
 ## Tiempo y recursos (MacBook, 8 núcleos CPU, 16 GB RAM, sin GPU)
 - Preparación + auditoría: ~15 s. E1: 4.8 s, E2: 6.5 s, E3: 4.5 s, E4: 54 s de ajuste.
-- `model.joblib`: v1 12 KB, v2 163 MB. Prueba de recuperación: **PENDIENTE**.
+- `model.joblib`: v1 12 KB, v2 163 MB. Evaluación de test: ~10 s.
+- Prueba de recuperación completa en entorno nuevo: 745 s (la mayor parte es `pip install` sin caché).
 
 ## Limitaciones conocidas
 - UNSW-NB15 es un banco de pruebas de 2015; no demuestra eficacia en una red actual.

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Defiende el servidor — Informe</title>
+<style>
+  @page { size: A4; margin: 15mm 16mm 14mm 16mm; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9.6pt; line-height: 1.38; color: #1b1f1d; }
+  h1 { font-size: 17pt; margin: 0 0 2px; color: #123a2a; }
+  .sub { color: #4b5550; margin: 0 0 8px; font-size: 9.2pt; }
+  h2 { font-size: 11.6pt; color: #123a2a; border-bottom: 1.5px solid #1e5a40; padding-bottom: 2px; margin: 12px 0 5px; }
+  h3 { font-size: 10pt; margin: 8px 0 3px; color: #1e5a40; }
+  p { margin: 3px 0 5px; text-align: justify; }
+  ul { margin: 2px 0 5px 16px; padding: 0; } li { margin: 1px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 4px 0 7px; font-size: 8.6pt; }
+  th, td { border: 1px solid #c8d1cc; padding: 2.5px 5px; text-align: left; vertical-align: top; }
+  th { background: #e8efeb; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+  code { font-family: Menlo, monospace; font-size: 8.1pt; background: #f1f4f2; padding: 0 2px; word-break: break-all; }
+  .box { background: #f3f6f4; border-left: 3px solid #1e5a40; padding: 4px 8px; margin: 5px 0; }
+  .refs { font-size: 8.4pt; } .pb { page-break-before: always; }
+  b.hl { color: #8a2b14; }
+</style>
+</head>
+<body>
+<h1>Defiende el servidor</h1>
+<p class="sub">MLOps · Visualización 2 · 2026-II · Grupo B — Luna Lugo, Alejandro Bernal · Universidad Externado de Colombia<br>
+Código: <code>github.com/alejobernalg/defiende-el-servidor</code> · Modelos: <code>huggingface.co/AlejandroLiberato/defiende-el-servidor-unsw-nb15</code> · DVC: <code>huggingface.co/datasets/AlejandroLiberato/defiende-el-servidor-dvc-storage</code></p>
+
+<div class="box">Cadena de trazabilidad: <b>commit Git</b> → <b>referencia DVC</b> (md5 de <code>data/prepared.dvc</code>) → <b>run ID de MLflow</b> → <b>revisión SHA de Hugging Face</b>. Cada pieza se vincula por identificadores y hashes, no por nombres de archivo. Todas las cifras de este informe provienen de los archivos en <code>evidencias/</code>.</div>
+
+<h2>1. Datos, auditoría y limpieza</h2>
+<p>Se usaron las particiones publicadas de UNSW-NB15. La copia descargada (mirror en GitHub) tenía <b class="hl">los nombres de archivo intercambiados</b>: el archivo llamado <i>training</i> tenía 82.332 filas y la huella del test del anexo. Cada archivo se asignó por SHA-256 y número de filas, no por su nombre (<code>data/fuentes.json</code>). Ambas huellas coinciden con el anexo.</p>
+<table>
+<tr><th>Archivo</th><th class="n">Filas</th><th class="n">Cols.</th><th class="n">Normal / Ataque</th><th class="n">Faltantes</th><th class="n">Duplicados por entradas*</th><th class="n">Grupos contradictorios (filas)</th></tr>
+<tr><td>training-set (<code>bec7dd5e…48fa</code>)</td><td class="n">175.341</td><td class="n">45</td><td class="n">56.000 / 119.341</td><td class="n">0</td><td class="n">74.301</td><td class="n">229 (940)</td></tr>
+<tr><td>testing-set (<code>734fe664…a559</code>)</td><td class="n">82.332</td><td class="n">45</td><td class="n">37.000 / 45.332</td><td class="n">0</td><td class="n">28.386</td><td class="n">6 (14)</td></tr>
+</table>
+<p style="font-size:8.4pt">* Filas repetidas más allá de la primera, comparando solo las 42 variables predictoras (sin <code>id</code>, <code>attack_cat</code> ni <code>label</code>).</p>
+<ul>
+<li><b>Variables:</b> 42 predictoras (3 categóricas: <code>proto</code>, <code>service</code>, <code>state</code>; 39 numéricas). Excluidas: <code>id</code> (identificador, solo para trazabilidad), <code>attack_cat</code> (revela la respuesta) y <code>label</code> (objetivo; ataque = 1 es la clase positiva).</li>
+<li><b>Política de limpieza:</b> no se elimina ninguna fila. Los duplicados reflejan la frecuencia real del tráfico. Los grupos contradictorios se conservan porque quitarlos exige mirar la etiqueta y el test también los contiene; son error irreducible y se reportan.</li>
+<li><b>Particiones:</b> solo a partir del archivo de entrenamiento. Cada fila recibe <code>group_id</code> = hash de sus entradas y <code>GroupShuffleSplit</code> (20 %, semilla 42) asigna grupos completos: <b>train 140.145 filas</b> (80.832 grupos) y <b>validación 35.196 filas</b> (20.208 grupos), con <b>0 grupos compartidos</b>. La asignación fila a fila está en <code>data/prepared/splits.csv</code> (<code>row_id = train:&lt;i&gt;</code>).</li>
+<li><b>Sin fuga:</b> imputación, one-hot, log1p y escalado viven dentro de un <code>sklearn.Pipeline</code> ajustado solo con train; el pipeline completo se guarda como un único artefacto.</li>
+<li><b>Solapamiento con test:</b> 8.541 filas de test (10,4 %) tienen entradas idénticas a filas de train/val (6.937 de train y 1.604 de val). Las métricas de test incluyen esas filas y se interpretan con esa limitación.</li>
+<li><b>Dos versiones DVC:</b> <code>data/raw.dvc</code> (archivos recibidos, md5 <code>fe93051a…</code>, commit <code>119c57a</code>) y <code>data/prepared.dvc</code> (train/val/splits/manifest, md5 <code>f6594eb8…</code>, commit <code>8a7a81f</code>). El remote es un dataset de Hugging Face leído por HTTP: <code>dvc pull</code> funciona sin credenciales ni caché previa.</li>
+</ul>
+
+<h2>2. Cuatro experimentos, dos familias</h2>
+<p>Todos usan la misma partición, semilla 42 y umbral 0,5 para compararse en igualdad de condiciones. Cada run registra en MLflow la hipótesis, el cambio, los parámetros, la semilla, el commit (<code>ecbb489</code>), los md5 DVC, los SHA-256 de train/val, las métricas, la matriz de confusión, la curva de umbrales y el modelo completo. <code>train.py</code> se niega a correr con cambios sin commit. Las métricas usan ataque como clase positiva; si un denominador es cero, la métrica vale 0,0 y se lista en <code>zero_denominators</code> (no ocurrió).</p>
+<table>
+<tr><th>ID · run</th><th>Familia / cambio · hipótesis</th><th class="n">Recall</th><th class="n">Prec.</th><th class="n">FPR</th><th class="n">Macro-F1</th><th class="n">FP / FN</th></tr>
+<tr><td>E1 <code>ae051ab6…</code></td><td>Reg. logística, one-hot + escalado (referencia). Un modelo lineal ya separa la mayoría de ataques.</td><td class="n">0,987</td><td class="n">0,925</td><td class="n">0,174</td><td class="n">0,923</td><td class="n">1.937 / 314</td></tr>
+<tr><td>E2 <code>04da9b28…</code></td><td>Igual + <code>log1p</code> en numéricas. Las colas pesadas perjudican al modelo lineal.</td><td class="n">0,974</td><td class="n">0,940</td><td class="n">0,134</td><td class="n">0,929</td><td class="n">1.494 / 631</td></tr>
+<tr><td>E3 <code>7bc3f16d…</code></td><td>Árbol de decisión (prof. 12, hoja ≥ 20). Hay umbrales e interacciones no lineales.</td><td class="n">0,971</td><td class="n">0,952</td><td class="n">0,106</td><td class="n">0,938</td><td class="n">1.182 / 687</td></tr>
+<tr><td>E4 <code>ef3b2eaf…</code></td><td>Random forest, 300 árboles. Promediar árboles reduce la varianza de E3.</td><td class="n">0,979</td><td class="n">0,956</td><td class="n">0,097</td><td class="n">0,947</td><td class="n">1.079 / 511</td></tr>
+</table>
+<p><b>Interpretación.</b> E1 detecta casi todos los ataques, pero marca como ataque el 17 % del tráfico normal: en un SOC eso significa miles de alertas falsas. <code>log1p</code> confirma su hipótesis en parte: baja la FPR 4 puntos a costa de recall. Pasar a árboles es el cambio más útil (FPR 0,106 y luego 0,097), lo que indica que las relaciones no son lineales (p. ej. <code>sttl</code> × <code>state</code>). E4 tiene además el mayor ROC-AUC (0,993), es decir, puntuaciones que ordenan mejor y permiten mover el umbral con poco costo.</p>
+
+<h2>3. v1 y v2: por qué existen y qué cambia</h2>
+<table>
+<tr><th></th><th>v1</th><th>v2</th></tr>
+<tr><td>Solución</td><td>E1, umbral 0,50 (primera solución funcional)</td><td>E4, umbral 0,64 (revisión basada en los experimentos)</td></tr>
+<tr><td>Código</td><td>tag <code>code-v1</code> = <code>ecbb4899…</code></td><td>tag <code>code-v2</code> = <code>43878a7f…</code>; selección congelada en <code>f7d4ffa3…</code></td></tr>
+<tr><td>MLflow run</td><td><code>ae051ab637994bb3bd29cf521f544087</code></td><td><code>ef3b2eaf90874ea5ae5b4b867327f00d</code></td></tr>
+<tr><td>HF revisión</td><td><code>8033bee6b22195aa79e007085d680b104256a769</code></td><td><code>6282a4d6e05d473f37d0243f3bfa18b10116586e</code></td></tr>
+<tr><td>SHA-256 modelo</td><td><code>2f8deb7a…45c0</code></td><td><code>03d39889…8a81</code></td></tr>
+<tr><td>Validación</td><td>recall 0,987 · prec. 0,925 · FPR 0,174 · macro-F1 0,923 · FP 1.937 · FN 314</td><td>recall 0,951 · prec. 0,977 · FPR 0,049 · macro-F1 0,944 · FP 548 · FN 1.176</td></tr>
+</table>
+<p><b>Qué mejora:</b> las alertas falsas en validación pasan de 1.937 a 548 (−72 %) y la precision sube a 0,977. <b>Qué empeora:</b> se pierden 1.176 ataques en lugar de 314. Se acepta este costo porque el equipo de seguridad no puede revisar un 17 % de falsas alarmas, y la regla garantiza recall ≥ 0,95. Cada revisión de Hugging Face contiene el pipeline completo, <code>config.json</code> (umbral, variables, hashes y referencias Git/DVC/MLflow), <code>predict.py</code>, <code>requirements.txt</code> y la model card.</p>
+
+<h2>4. Elección del umbral (solo validación)</h2>
+<p>La regla se escribió en <code>configs/seleccion.yaml</code> y se hizo commit <b>antes</b> de ejecutar los experimentos:</p>
+<ul>
+<li><b>Modelo:</b> el de mayor macro-F1 en validación con umbral 0,5 (desempate por menor FPR).</li>
+<li><b>Umbral:</b> el que <b>minimiza la FPR manteniendo recall de ataque ≥ 0,95</b>, en una rejilla de 0,01 a 0,99 (<code>y_pred = 1 si score_attack ≥ umbral</code>).</li>
+</ul>
+<p>Con E4, pasar de 0,50 a 0,64 baja la FPR de 0,097 a 0,049 con un recall de 0,951. El macro-F1 baja levemente (0,947 → 0,944): el criterio prioriza menos alertas falsas sobre macro-F1, y la decisión se documenta. <code>evidencias/seleccion.json</code> se guardó con un commit fechado (2026-10-29) antes de cualquier uso del test, y el test no intervino en ninguna decisión.</p>
+
+<h2>5. Evaluación final en test</h2>
+<p><code>evaluate_test.py</code> descarga v2 de Hugging Face por su SHA, comprueba que el hash del modelo coincide con la selección congelada y evalúa <b>una sola vez</b> las 82.332 filas de test, sin eliminar ninguna. Las predicciones por fila (<code>row_id = test:&lt;i&gt;</code>, <code>y_true</code>, <code>score_attack</code>, <code>y_pred</code>) están en <code>predicciones-test.csv</code>; <code>recompute_test_metrics.py</code> recalcula las métricas solo con la librería estándar y coinciden exactamente.</p>
+<table>
+<tr><th>Conjunto (umbral 0,64)</th><th class="n">Recall</th><th class="n">Precision</th><th class="n">FPR</th><th class="n">Macro-F1</th><th class="n">TN / FP / FN / TP</th></tr>
+<tr><td>Validación</td><td class="n">0,951</td><td class="n">0,977</td><td class="n">0,049</td><td class="n">0,944</td><td class="n">10.575 / 548 / 1.176 / 22.897</td></tr>
+<tr><td>Test</td><td class="n">0,966</td><td class="n">0,873</td><td class="n"><b class="hl">0,173</b></td><td class="n">0,901</td><td class="n">30.604 / 6.396 / 1.558 / 43.774</td></tr>
+</table>
+<p><b>El resultado empeora y se conserva.</b> La FPR se triplica respecto a validación. El análisis descriptivo posterior (<code>analisis-errores.json</code>, no usado para ajustar nada) muestra dos causas:</p>
+<ul>
+<li>El test tiene más tráfico normal (45 % frente a 32 %).</li>
+<li>El tráfico normal con <code>service='-'</code> recibe una FPR de 0,20 en test frente a 0,06 en validación; también <code>http</code> (0,17) y <code>ftp</code> (0,28).</li>
+</ul>
+<p>Es un cambio de distribución entre las particiones publicadas que la validación interna, tomada del mismo archivo de entrenamiento, no podía anticipar. Por tipo de ataque, el recall es ≥ 0,98 salvo en <i>Fuzzers</i> (0,76). Al añadir el resultado a la model card se creó una nueva revisión de HF (<code>bfdc6b94…</code>) que solo cambia <code>README.md</code>; se verificó que <code>model.joblib</code> conserva el SHA-256 <code>03d39889…</code>.</p>
+
+<h2>6. Prueba de recuperación</h2>
+<p><code>scripts/recuperacion.sh</code> se ejecutó en una carpeta y un entorno nuevos: clona GitHub en el commit de entrega, crea un venv nuevo, instala <code>requirements.txt</code> y ejecuta <code>dvc pull</code> desde Hugging Face con la caché vacía. Luego verifica las huellas de los datos raw y preparados, descarga v1 y v2 por su SHA completo en una caché de HF vacía y predice 25 filas fijas de validación (10 normales y 15 ataques reales). Las salidas recuperadas se comparan con las guardadas antes de publicar: <code>y_pred</code> idéntico y |Δ score| ≤ 1e-9. Ese margen existe porque el random forest suma en paralelo y la diferencia observada es del orden de 1e-16. El log, las entradas, las salidas, los hashes y las comparaciones están en <code>evidencias/recuperacion/</code>.</p>
+
+<h2>7. Limitaciones</h2>
+<ul>
+<li>UNSW-NB15 es un banco de pruebas sintético de 2015: no demuestra eficacia en una red actual.</li>
+<li>Hay un cambio de distribución entre las particiones publicadas (sección 5); un despliegue real requeriría recalibrar el umbral con tráfico propio y monitorear la FPR.</li>
+<li>El umbral se eligió en la misma validación donde se reportan las métricas de v2, así que estas son algo optimistas; el test lo confirma.</li>
+<li>El 10,4 % del test repite entradas vistas en train/val, y hay grupos con etiquetas contradictorias.</li>
+<li>Los modelos son pickles de scikit-learn: solo deben cargarse con las versiones fijadas y desde fuentes de confianza.</li>
+<li>El seguimiento de MLflow es local (SQLite); la evidencia consultable es la exportación en <code>evidencias/mlflow/</code>.</li>
+</ul>
+
+<h2>Referencias</h2>
+<p class="refs">Moustafa, N., &amp; Slay, J. (2015). UNSW-NB15: a comprehensive data set for network intrusion detection systems. <i>MilCIS</i>, IEEE. ·
+Moustafa, N., &amp; Slay, J. (2016). The evaluation of Network Anomaly Detection Systems: Statistical analysis of the UNSW-NB15 data set and the comparison with the KDD99 data set. <i>Information Security Journal</i>, 25(1–3). ·
+Documentación de scikit-learn (Pipeline, GroupShuffleSplit, «Common pitfalls»), DVC, MLflow Tracking y Hugging Face Hub (descarga por revisión, model cards). ·
+Asistencia de IA: Claude Code (Anthropic), declarada en <code>entrega.md</code>.</p>
+</body>
+</html>
