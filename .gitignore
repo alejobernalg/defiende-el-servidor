@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+mlflow.db
+mlruns/
+mlartifacts/
+artifacts/
+hf_build/
+.dvc_storage/
