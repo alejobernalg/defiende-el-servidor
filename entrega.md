@@ -63,3 +63,7 @@
 - No se adaptó código externo más allá de la documentación oficial de scikit-learn, MLflow, DVC y Hugging Face.
 - Trazabilidad de commits: los commits de desarrollo y la entrega original se publicaron desde `alejobernalg` (Alejandro Bernal). La aclaración y los ajustes finales de documentación se publican desde `lunalugoeuc-a11y` (Luna Lugo). El historial indica la cuenta que publicó cada cambio; Luna y Alejandro trabajaron conjuntamente en el proyecto.
 - Contribución de los integrantes: Luna Lugo y Alejandro Bernal realizaron en conjunto las decisiones, implementación, experimentos, documentación y verificaciones de este proyecto.
+
+
+## Modelo E4 reconstruido incluido en el ZIP
+El ZIP incluye `artifacts/e4_random_forest_reconstruido/model.joblib`, reentrenado con el Random Forest de la configuración E4, semilla 42 y datos preparados recuperados de DVC. El `reconstruction.json` registra sus métricas y SHA-256. Esta reconstrucción no es el `model.pkl` original del run MLflow; para reproducir las predicciones de recuperación registradas, use el `model.joblib` de la revisión v2 inmutable de Hugging Face.
