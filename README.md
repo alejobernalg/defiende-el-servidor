@@ -102,3 +102,8 @@ evidencias/   auditoria.json, experimentos.csv, seleccion.json, metricas-test.js
 ## Datos y atribución
 UNSW-NB15 — Moustafa, N. & Slay, J. (2015), UNSW Canberra. Página oficial:
 https://research.unsw.edu.au/projects/unsw-nb15-dataset. Uso académico.
+
+
+## Reconstrucción local de E4
+
+El ZIP de entrega incluye `artifacts/e4_random_forest_reconstruido/model.joblib`, reentrenado con la configuración E4, la semilla 42 y los datos versionados con DVC. `reconstruction.json` documenta sus métricas, entorno y SHA-256. Es una reconstrucción funcional, no el `model.pkl` original del run MLflow; la revisión v2 de Hugging Face sigue siendo la referencia para reproducir las predicciones ya evaluadas.
